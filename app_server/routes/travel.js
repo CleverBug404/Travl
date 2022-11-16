@@ -5,4 +5,4 @@ const controller = require("../controllers/travel");
 /* Get home page.*/
 router.get("/", controller.travel);
 
-module.exportd = router;
+module.exports = router;
