@@ -3,8 +3,8 @@ const readLine = require('readline');
 const host = process.env.DB_HOST || '127.0.0.1:27017'
 let dbURI = `mongodb://${host}/travlr`;
 
-
-mongoose.set('useUnifiedTopology', true);
+mongoose.set('useUnifiedTopology',true);
+//mongoose.set('useNewUrlParser', true);
 
 const connect = () => {
     setTimeout( () => mongoose.connect(dbURI, {
