@@ -1,5 +1,8 @@
+const res = require('express/lib/response');
+const async = require('hbs/lib/async');
 const mongoose = require('mongoose'); //.set('debug', true);
 const Model = mongoose.model('trips');
+const Trip = mongoose.model('trips');
 
 //GET: /trips - List all the trips
 const tripsList = async (req, res) => {
@@ -42,7 +45,33 @@ const tripsFindByCode = async (req, res) => {
         });
 };
 
+const tripsAddTrip = async (req, res) => {
+    Trip
+        .create({
+            code: req.body.code,
+            name: req.body.name,
+            length: req.body.length,
+            start: req.body.start,
+            resort: req.body.resort,
+            perPerson: req.body.perPerson,
+            image: req.body.image,
+            description: req.body.description
+        },
+        (err, trip) => {
+            if (err) {
+                return res
+                    .status(400)
+                    .json(err);
+            } else {
+                return res
+                    .status(201)
+                    .json(trip);
+            }
+        });
+}
+
 module.exports = {
     tripsList,
-    tripsFindByCode
+    tripsFindByCode,
+    tripsAddTrip
 };
