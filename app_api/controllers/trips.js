@@ -2,7 +2,7 @@ const res = require('express/lib/response');
 const async = require('hbs/lib/async');
 const mongoose = require('mongoose'); //.set('debug', true);
 const Model = mongoose.model('trips');
-const Trip = mongoose.model('trips');
+const model = mongoose.model('trips');
 
 //GET: /trips - List all the trips
 const tripsList = async (req, res) => {
@@ -46,7 +46,7 @@ const tripsFindByCode = async (req, res) => {
 };
 
 const tripsAddTrip = async (req, res) => {
-    Trip
+    model
         .create({
             code: req.body.code,
             name: req.body.name,
@@ -70,8 +70,45 @@ const tripsAddTrip = async (req, res) => {
         });
 }
 
+const tripsUpdateTrip = async (req, res) => {
+    console.log(req.body);
+    model
+        .findOneAndUpdate({'code' : req.params.tripCode}, {
+            code: req.body.code,
+            name: req.body.name,
+            length: req.body.length,
+            start: req.body.start,
+            resort: req.body.resort,
+            perPerson: req.body.perPerson,
+            image: req.body.image,
+            description: req.body.description
+        }, {new: true})
+        .then(trip => {
+            if (!trip) {
+                return res
+                    .status(404)
+                    .send({
+                        message: "Trips not found with code " + req.params.tripCode
+                    });
+            }
+            res.send(trip);
+        }).catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res
+                    .status(404)
+                    .send({
+                        message: "Trip not found with code " + req.params.tripCode
+                    });
+            }
+            return res
+                .status(500)
+                .json(err);
+        });
+}
+
 module.exports = {
     tripsList,
     tripsFindByCode,
-    tripsAddTrip
+    tripsAddTrip,
+    tripsUpdateTrip
 };

@@ -2,5 +2,86 @@
   <h2 class="text-center">Edit Trip</h2>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     
+    <div class="form-group">
+      <label>Code:</label>
+      <input type="text" formControlName="code"
+        placeholder="Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+      <div *ngIf="submitted && f.code.errors">
+        <div *ngIf="f.code.errors.required">
+          Trip Code is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" formControlName="name" placeholder="Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+      <div *ngIf="submitted && f.name.errors">
+        <div *ngIf="f.name.errors.required">
+          Name is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>length:</label>
+      <input type="text" formControlName="length" placeholder="length" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.length.errors }">
+      <div *ngIf="submitted && f.length.errors">
+        <div *ngIf="f.length.errors.required">
+          length is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>start:</label>
+      <input type="text" formControlName="start" placeholder="start" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.start.errors }">
+      <div *ngIf="submitted && f.start.errors">
+        <div *ngIf="f.start.errors.required">
+          start is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>resort:</label>
+      <input type="text" formControlName="resort" placeholder="resort" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.resort.errors }">
+      <div *ngIf="submitted && f.resort.errors">
+        <div *ngIf="f.resort.errors.required">
+          resort is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>perPerson:</label>
+      <input type="text" formControlName="perPerson" placeholder="perPerson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.perPerson.errors }">
+      <div *ngIf="submitted && f.perPerson.errors">
+        <div *ngIf="f.perPerson.errors.required">
+          perPerson is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>image:</label>
+      <input type="text" formControlName="image" placeholder="image" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+      <div *ngIf="submitted && f.image.errors">
+        <div *ngIf="f.image.errors.required">
+          image is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>description:</label>
+      <input type="text" formControlName="description" placeholder="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+      <div *ngIf="submitted && f.description.errors">
+        <div *ngIf="f.description.errors.required">
+          description is required
+        </div>
+      </div>
+    </div>
+    <button (click)="editTrip(trip)" class="btn btn-info">Edit</button>
   </form>
 </div>
